@@ -83,6 +83,17 @@ ABILITIES = {
     "Camouflage": "gnb",
 }
 
+# job abbreviation -> ClassJob row id
+JOBS = {
+    "pld": 19, "war": 21, "drk": 32, "gnb": 37,
+    "whm": 24, "sch": 28, "ast": 33, "sge": 40,
+    "mnk": 20, "drg": 22, "nin": 30, "sam": 34, "rpr": 39, "vpr": 41,
+    "brd": 23, "mch": 31, "dnc": 38,
+    "blm": 25, "smn": 27, "rdm": 35, "pct": 42,
+}
+# 64px job glyph sets: 091000 silver, 092000 gold, 093000 orange, 094000 blue
+JOB_ICON_BASE = 92000
+
 
 def get_json(url: str) -> dict:
     req = urllib.request.Request(url, headers={"User-Agent": "ffxiv-defense-planner"})
@@ -133,8 +144,22 @@ def main() -> None:
         print(f"OK    {name} -> {fname} (action {row['row_id']}, icon {icon['id']})")
         time.sleep(0.15)  # be polite to the API
 
+    jobs_dir = OUT / "jobs"
+    jobs_dir.mkdir(exist_ok=True)
+    for abbr, job_id in JOBS.items():
+        icon_id = JOB_ICON_BASE + job_id
+        path = f"ui/icon/{icon_id // 1000 * 1000:06d}/{icon_id:06d}.tex"
+        req = urllib.request.Request(
+            f"{API}/asset?path={path}&format=png",
+            headers={"User-Agent": "ffxiv-defense-planner"},
+        )
+        with urllib.request.urlopen(req) as r:
+            (jobs_dir / f"{abbr}.png").write_bytes(r.read())
+        print(f"OK    job {abbr.upper()} -> jobs/{abbr}.png")
+        time.sleep(0.15)
+
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2))
-    print(f"\n{len(manifest)} icons saved to {OUT}")
+    print(f"\n{len(manifest)} ability icons + {len(JOBS)} job icons saved to {OUT}")
     if failures:
         print(f"Failed: {failures}")
 
