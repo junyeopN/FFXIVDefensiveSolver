@@ -1,0 +1,380 @@
+{
+  "Reprisal": {
+    "job": "tank",
+    "action_id": 7535,
+    "icon_id": 806,
+    "file": "tank_reprisal.png"
+  },
+  "Divine Veil": {
+    "job": "pld",
+    "action_id": 3540,
+    "icon_id": 2508,
+    "file": "pld_divine_veil.png"
+  },
+  "Passage of Arms": {
+    "job": "pld",
+    "action_id": 7385,
+    "icon_id": 2515,
+    "file": "pld_passage_of_arms.png"
+  },
+  "Shake It Off": {
+    "job": "war",
+    "action_id": 7388,
+    "icon_id": 2563,
+    "file": "war_shake_it_off.png"
+  },
+  "Dark Missionary": {
+    "job": "drk",
+    "action_id": 16471,
+    "icon_id": 3087,
+    "file": "drk_dark_missionary.png"
+  },
+  "Heart of Light": {
+    "job": "gnb",
+    "action_id": 16160,
+    "icon_id": 3424,
+    "file": "gnb_heart_of_light.png"
+  },
+  "Feint": {
+    "job": "melee",
+    "action_id": 7549,
+    "icon_id": 828,
+    "file": "melee_feint.png"
+  },
+  "Mantra": {
+    "job": "mnk",
+    "action_id": 65,
+    "icon_id": 216,
+    "file": "mnk_mantra.png"
+  },
+  "Troubadour": {
+    "job": "brd",
+    "action_id": 7405,
+    "icon_id": 2612,
+    "file": "brd_troubadour.png"
+  },
+  "Tactician": {
+    "job": "mch",
+    "action_id": 16889,
+    "icon_id": 3040,
+    "file": "mch_tactician.png"
+  },
+  "Dismantle": {
+    "job": "mch",
+    "action_id": 2887,
+    "icon_id": 3011,
+    "file": "mch_dismantle.png"
+  },
+  "Shield Samba": {
+    "job": "dnc",
+    "action_id": 16012,
+    "icon_id": 3469,
+    "file": "dnc_shield_samba.png"
+  },
+  "Addle": {
+    "job": "caster",
+    "action_id": 7560,
+    "icon_id": 861,
+    "file": "caster_addle.png"
+  },
+  "Magick Barrier": {
+    "job": "rdm",
+    "action_id": 25857,
+    "icon_id": 3237,
+    "file": "rdm_magick_barrier.png"
+  },
+  "Temperance": {
+    "job": "whm",
+    "action_id": 16536,
+    "icon_id": 2645,
+    "file": "whm_temperance.png"
+  },
+  "Asylum": {
+    "job": "whm",
+    "action_id": 3569,
+    "icon_id": 2632,
+    "file": "whm_asylum.png"
+  },
+  "Liturgy of the Bell": {
+    "job": "whm",
+    "action_id": 25862,
+    "icon_id": 2649,
+    "file": "whm_liturgy_of_the_bell.png"
+  },
+  "Sacred Soil": {
+    "job": "sch",
+    "action_id": 188,
+    "icon_id": 2804,
+    "file": "sch_sacred_soil.png"
+  },
+  "Fey Illumination": {
+    "job": "sch",
+    "action_id": 16538,
+    "icon_id": 2853,
+    "file": "sch_fey_illumination.png"
+  },
+  "Expedient": {
+    "job": "sch",
+    "action_id": 25868,
+    "icon_id": 2878,
+    "file": "sch_expedient.png"
+  },
+  "Seraphism": {
+    "job": "sch",
+    "action_id": 37014,
+    "icon_id": 2881,
+    "file": "sch_seraphism.png"
+  },
+  "Collective Unconscious": {
+    "job": "ast",
+    "action_id": 3613,
+    "icon_id": 3140,
+    "file": "ast_collective_unconscious.png"
+  },
+  "Neutral Sect": {
+    "job": "ast",
+    "action_id": 16559,
+    "icon_id": 3552,
+    "file": "ast_neutral_sect.png"
+  },
+  "Macrocosmos": {
+    "job": "ast",
+    "action_id": 25874,
+    "icon_id": 3562,
+    "file": "ast_macrocosmos.png"
+  },
+  "Sun Sign": {
+    "job": "ast",
+    "action_id": 37031,
+    "icon_id": 3109,
+    "file": "ast_sun_sign.png"
+  },
+  "Kerachole": {
+    "job": "sge",
+    "action_id": 24298,
+    "icon_id": 3666,
+    "file": "sge_kerachole.png"
+  },
+  "Holos": {
+    "job": "sge",
+    "action_id": 24310,
+    "icon_id": 3678,
+    "file": "sge_holos.png"
+  },
+  "Panhaima": {
+    "job": "sge",
+    "action_id": 24311,
+    "icon_id": 3679,
+    "file": "sge_panhaima.png"
+  },
+  "Physis II": {
+    "job": "sge",
+    "action_id": 24302,
+    "icon_id": 3670,
+    "file": "sge_physis_ii.png"
+  },
+  "Divine Benison": {
+    "job": "whm",
+    "action_id": 7432,
+    "icon_id": 2638,
+    "file": "whm_divine_benison.png"
+  },
+  "Aquaveil": {
+    "job": "whm",
+    "action_id": 25861,
+    "icon_id": 2648,
+    "file": "whm_aquaveil.png"
+  },
+  "Protraction": {
+    "job": "sch",
+    "action_id": 25867,
+    "icon_id": 2877,
+    "file": "sch_protraction.png"
+  },
+  "Exaltation": {
+    "job": "ast",
+    "action_id": 25873,
+    "icon_id": 3561,
+    "file": "ast_exaltation.png"
+  },
+  "Celestial Intersection": {
+    "job": "ast",
+    "action_id": 16556,
+    "icon_id": 3556,
+    "file": "ast_celestial_intersection.png"
+  },
+  "Haima": {
+    "job": "sge",
+    "action_id": 24305,
+    "icon_id": 3673,
+    "file": "sge_haima.png"
+  },
+  "Taurochole": {
+    "job": "sge",
+    "action_id": 24303,
+    "icon_id": 3671,
+    "file": "sge_taurochole.png"
+  },
+  "Intervention": {
+    "job": "pld",
+    "action_id": 7382,
+    "icon_id": 2512,
+    "file": "pld_intervention.png"
+  },
+  "Cover": {
+    "job": "pld",
+    "action_id": 27,
+    "icon_id": 2501,
+    "file": "pld_cover.png"
+  },
+  "Nascent Flash": {
+    "job": "war",
+    "action_id": 16464,
+    "icon_id": 2567,
+    "file": "war_nascent_flash.png"
+  },
+  "The Blackest Night": {
+    "job": "drk",
+    "action_id": 7393,
+    "icon_id": 3081,
+    "file": "drk_the_blackest_night.png"
+  },
+  "Oblation": {
+    "job": "drk",
+    "action_id": 25754,
+    "icon_id": 3089,
+    "file": "drk_oblation.png"
+  },
+  "Heart of Corundum": {
+    "job": "gnb",
+    "action_id": 25758,
+    "icon_id": 3430,
+    "file": "gnb_heart_of_corundum.png"
+  },
+  "Rampart": {
+    "job": "tank",
+    "action_id": 7531,
+    "icon_id": 801,
+    "file": "tank_rampart.png"
+  },
+  "Hallowed Ground": {
+    "job": "pld",
+    "action_id": 30,
+    "icon_id": 2502,
+    "file": "pld_hallowed_ground.png"
+  },
+  "Guardian": {
+    "job": "pld",
+    "action_id": 36920,
+    "icon_id": 2524,
+    "file": "pld_guardian.png"
+  },
+  "Sentinel": {
+    "job": "pld",
+    "action_id": 17,
+    "icon_id": 151,
+    "file": "pld_sentinel.png"
+  },
+  "Holy Sheltron": {
+    "job": "pld",
+    "action_id": 25746,
+    "icon_id": 2950,
+    "file": "pld_holy_sheltron.png"
+  },
+  "Sheltron": {
+    "job": "pld",
+    "action_id": 3542,
+    "icon_id": 2510,
+    "file": "pld_sheltron.png"
+  },
+  "Bulwark": {
+    "job": "pld",
+    "action_id": 22,
+    "icon_id": 167,
+    "file": "pld_bulwark.png"
+  },
+  "Holmgang": {
+    "job": "war",
+    "action_id": 43,
+    "icon_id": 266,
+    "file": "war_holmgang.png"
+  },
+  "Damnation": {
+    "job": "war",
+    "action_id": 36923,
+    "icon_id": 2573,
+    "file": "war_damnation.png"
+  },
+  "Vengeance": {
+    "job": "war",
+    "action_id": 44,
+    "icon_id": 267,
+    "file": "war_vengeance.png"
+  },
+  "Bloodwhetting": {
+    "job": "war",
+    "action_id": 25751,
+    "icon_id": 2569,
+    "file": "war_bloodwhetting.png"
+  },
+  "Raw Intuition": {
+    "job": "war",
+    "action_id": 3551,
+    "icon_id": 2559,
+    "file": "war_raw_intuition.png"
+  },
+  "Thrill of Battle": {
+    "job": "war",
+    "action_id": 40,
+    "icon_id": 263,
+    "file": "war_thrill_of_battle.png"
+  },
+  "Living Dead": {
+    "job": "drk",
+    "action_id": 3638,
+    "icon_id": 3077,
+    "file": "drk_living_dead.png"
+  },
+  "Shadowed Vigil": {
+    "job": "drk",
+    "action_id": 36927,
+    "icon_id": 3094,
+    "file": "drk_shadowed_vigil.png"
+  },
+  "Shadow Wall": {
+    "job": "drk",
+    "action_id": 3636,
+    "icon_id": 3075,
+    "file": "drk_shadow_wall.png"
+  },
+  "Dark Mind": {
+    "job": "drk",
+    "action_id": 3634,
+    "icon_id": 3076,
+    "file": "drk_dark_mind.png"
+  },
+  "Superbolide": {
+    "job": "gnb",
+    "action_id": 16152,
+    "icon_id": 3416,
+    "file": "gnb_superbolide.png"
+  },
+  "Great Nebula": {
+    "job": "gnb",
+    "action_id": 36935,
+    "icon_id": 3435,
+    "file": "gnb_great_nebula.png"
+  },
+  "Nebula": {
+    "job": "gnb",
+    "action_id": 16148,
+    "icon_id": 3412,
+    "file": "gnb_nebula.png"
+  },
+  "Camouflage": {
+    "job": "gnb",
+    "action_id": 16140,
+    "icon_id": 3404,
+    "file": "gnb_camouflage.png"
+  }
+}
