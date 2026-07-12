@@ -139,5 +139,9 @@ export async function fetchFightData(
       type: e.type as "begincast" | "cast",
     }));
 
-  return { fight, players, enemies, abilities: new Map(abilities.map((a) => [a.gameID, a])), damageTaken, casts };
+  // fflogs returns ability.type as a string; normalize to number once here
+  const abilityMap = new Map<number, AbilityInfo>(
+    abilities.map((a) => [a.gameID, { gameID: a.gameID, name: a.name, type: Number(a.type) }]),
+  );
+  return { fight, players, enemies, abilities: abilityMap, damageTaken, casts };
 }

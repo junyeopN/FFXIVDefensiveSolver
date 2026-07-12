@@ -76,7 +76,9 @@ export async function runPipeline(
   const instances = groupEvents(data.damageTaken, data.casts);
   let damages = instances
     .map((i) => classifyInstance(i, data.players, data.enemies, data.abilities, slotByActorId))
-    .filter((d) => d.amount >= minHp * NOISE_FRACTION);
+    .filter((d) => d.amount >= minHp * NOISE_FRACTION)
+    // auto-attacks are constant pressure, not plannable mechanics
+    .filter((d) => d.name.toLowerCase() !== "attack");
   damages = applyOverrides(damages, loadOverride(data.fight.encounterID));
 
   const skills = loadSkills();
@@ -87,7 +89,8 @@ export async function runPipeline(
   let sheetError: string | undefined;
   try {
     sheetUrl = await deps.exportSheet({
-      title: `${data.fight.name} mitigation plan (${new Date().toISOString().slice(0, 10)})`,
+      // seconds-precision timestamp keeps tab titles unique across runs
+      title: `${data.fight.name} ${new Date().toISOString().slice(0, 19).replace("T", " ")}`,
       rows,
     });
   } catch (err) {

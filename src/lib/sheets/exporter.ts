@@ -10,32 +10,46 @@ function getAuth() {
   return new google.auth.JWT({
     email: parsed.client_email,
     key: parsed.private_key,
-    scopes: ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"],
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 }
 
+// Sheet tab titles forbid []*/\?: and are capped at 100 chars.
+function sanitizeTabTitle(title: string): string {
+  return title.replace(/[[\]*/\\?:]/g, "").slice(0, 100);
+}
+
+// Service accounts have no Drive storage quota, so the app writes each plan as a
+// new tab in a user-owned spreadsheet (shared with the service account as editor).
 export async function exportToSheet(input: ExportInput): Promise<string> {
+  const spreadsheetId = process.env.MITIGATION_SPREADSHEET_ID;
+  if (!spreadsheetId) throw new Error("MITIGATION_SPREADSHEET_ID is not set");
+
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
-  const drive = google.drive({ version: "v3", auth });
+  const title = sanitizeTabTitle(input.title);
 
-  const created = await sheets.spreadsheets.create({
+  const added = await sheets.spreadsheets.batchUpdate({
+    spreadsheetId,
     requestBody: {
-      properties: { title: input.title },
-      sheets: [{
-        properties: { title: "Mitigation", gridProperties: { frozenRowCount: 1 } },
-        data: [{ startRow: 0, startColumn: 0, rowData: input.rows }],
+      requests: [{
+        addSheet: {
+          properties: { title, gridProperties: { frozenRowCount: 1 } },
+        },
       }],
     },
   });
-
-  const spreadsheetId = created.data.spreadsheetId!;
-  const sheetId = created.data.sheets![0].properties!.sheetId!;
+  const sheetId = added.data.replies![0].addSheet!.properties!.sheetId!;
 
   await sheets.spreadsheets.batchUpdate({
     spreadsheetId,
     requestBody: {
       requests: [
+        { updateCells: {
+            start: { sheetId, rowIndex: 0, columnIndex: 0 },
+            rows: input.rows,
+            fields: "userEnteredValue,userEnteredFormat,note",
+        } },
         { updateDimensionProperties: { range: { sheetId, dimension: "COLUMNS", startIndex: 0, endIndex: 2 },
             properties: { pixelSize: 50 }, fields: "pixelSize" } },
         { updateDimensionProperties: { range: { sheetId, dimension: "COLUMNS", startIndex: 2, endIndex: 3 },
@@ -48,14 +62,5 @@ export async function exportToSheet(input: ExportInput): Promise<string> {
     },
   });
 
-  const shareEmail = process.env.SHEET_SHARE_EMAIL;
-  if (shareEmail) {
-    await drive.permissions.create({
-      fileId: spreadsheetId,
-      requestBody: { type: "user", role: "writer", emailAddress: shareEmail },
-      sendNotificationEmail: false,
-    });
-  }
-
-  return created.data.spreadsheetUrl ?? `https://docs.google.com/spreadsheets/d/${spreadsheetId}`;
+  return `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit#gid=${sheetId}`;
 }

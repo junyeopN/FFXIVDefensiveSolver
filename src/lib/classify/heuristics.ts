@@ -2,10 +2,12 @@ import type { Damage, DamageCategory, DamageType } from "../types";
 import type { AbilityInfo, EnemyActor, PlayerActor } from "../fflogs/report";
 import type { MechanicInstance } from "./grouping";
 
-// Assumed fflogs FF ability type values; verified against a real log during E2E.
+// fflogs FF ability type values, verified against report ZNY4yvA2aqdp6xjB fight 11:
+// 128 = physical (Attack, Ultimate Embrace), 1024 = magic (Hyperdrive, Light of Judgment),
+// 32 = special/"darkness" (Ave Maria, White Hole, Antilight)
 export const FFLOGS_TYPE_PHYSICAL = 128;
 export const FFLOGS_TYPE_MAGIC = 1024;
-export const FFLOGS_TYPE_DARK = 64;
+export const FFLOGS_TYPE_DARK = 32;
 
 const RAIDWIDE_MIN_TARGETS = 6;
 const TANKBUSTER_MIN_FRACTION = 0.4;
