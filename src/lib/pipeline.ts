@@ -4,6 +4,7 @@ import type { fetchFightData as FetchFightData, listFights as ListFights } from 
 import { groupEvents } from "./classify/grouping";
 import { classifyInstance } from "./classify/heuristics";
 import { applyOverrides, loadOverride } from "./classify/overrides";
+import { mergeConsecutive } from "./classify/merge";
 import { solve } from "./solver/solver";
 import { loadSkills, JOB_ROLES } from "./data/skills";
 import { buildSheetRows } from "./sheets/layout";
@@ -80,6 +81,8 @@ export async function runPipeline(
     // auto-attacks are constant pressure, not plannable mechanics
     .filter((d) => d.name.toLowerCase() !== "attack");
   damages = applyOverrides(damages, loadOverride(data.fight.encounterID));
+  // after overrides so renamed abilities merge under their final name
+  damages = mergeConsecutive(damages);
 
   const skills = loadSkills();
   const plans = solve(damages, members, skills);
