@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
+import "./globals.css";
 
 export const metadata = { title: "FFXIV Defense Solver" };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ fontFamily: "sans-serif", margin: "2rem" }}>{children}</body>
+      <body className="min-h-screen bg-background text-foreground antialiased">{children}</body>
     </html>
   );
 }

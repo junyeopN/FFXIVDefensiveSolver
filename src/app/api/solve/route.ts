@@ -1,4 +1,8 @@
 import { NextResponse } from "next/server";
+
+// full solve (fflogs fetch + classify + solve + Sheets write) can exceed
+// the 10s serverless default on Vercel
+export const maxDuration = 60;
 import { FflogsClient } from "../../../lib/fflogs/client";
 import { fetchFightData, listFights } from "../../../lib/fflogs/report";
 import { exportToSheet } from "../../../lib/sheets/exporter";
