@@ -31,6 +31,9 @@ export interface PipelineResult {
 const SLOTS = ["T1", "T2", "H1", "H2", "D1", "D2", "D3", "D4"];
 const NOISE_FRACTION = 0.05;
 const FALLBACK_HP = 100000;
+// damage beyond this multiple of max HP is a failure punishment (unresolved
+// mechanic, death wall), not plannable damage
+const INSTAKILL_MULTIPLIER = 10;
 
 export async function runPipeline(
   url: string, party: PartySelection, deps: PipelineDeps,
@@ -81,6 +84,26 @@ export async function runPipeline(
     // auto-attacks are constant pressure, not plannable mechanics
     .filter((d) => d.name.toLowerCase() !== "attack");
   damages = applyOverrides(damages, loadOverride(data.fight.encounterID));
+
+  // An ability whose worst hit exceeds the insta-kill threshold is a failure
+  // punishment; drop ALL its instances (weaker hits are shielded/partial
+  // victims of the same failure). Tankbusters legitimately exceed 10x a dps's
+  // hp, so busters are referenced against tank hp instead.
+  const maxTankHp = Math.max(...members.filter((m) => m.role === "tank").map((m) => m.maxHp));
+  const maxNonTankHp = Math.max(...members.filter((m) => m.role !== "tank").map((m) => m.maxHp));
+  const byName = new Map<string, { max: number; buster: boolean }>();
+  for (const d of damages) {
+    const entry = byName.get(d.name) ?? { max: 0, buster: false };
+    entry.max = Math.max(entry.max, d.amount);
+    entry.buster = entry.buster || d.category === "Tankbuster";
+    byName.set(d.name, entry);
+  }
+  damages = damages.filter((d) => {
+    const entry = byName.get(d.name)!;
+    const reference = entry.buster ? maxTankHp : maxNonTankHp;
+    return entry.max <= reference * INSTAKILL_MULTIPLIER;
+  });
+
   // after overrides so renamed abilities merge under their final name
   damages = mergeConsecutive(damages);
 

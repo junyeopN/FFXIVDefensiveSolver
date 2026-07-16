@@ -72,4 +72,33 @@ describe("runPipeline", () => {
       runPipeline("https://www.fflogs.com/reports/AbC123xYz9KlMnOp", party, deps()),
     ).rejects.toThrow("Pick a fight");
   });
+
+  it("drops insta-kill damage above 10x non-tank max hp", async () => {
+    // failure punishment: 3M raidwide vs 115k max non-tank hp
+    const withInstakill = {
+      ...fightData,
+      abilities: new Map([
+        [500, { gameID: 500, name: "Big Raidwide", type: 1024 }],
+        [600, { gameID: 600, name: "Chaotic Holy", type: 32 }],
+      ]),
+      damageTaken: [
+        ...fightData.damageTaken,
+        ...[1, 2, 3, 4, 5, 6, 7, 8].map((targetID) => ({
+          timestamp: 120000, abilityGameID: 600, sourceID: 9, targetID,
+          amount: 3000000, unmitigatedAmount: 3000000, absorbed: 0,
+        })),
+        // weaker instance of the same insta-kill ability: also dropped by name
+        ...[1, 2, 3, 4, 5, 6, 7, 8].map((targetID) => ({
+          timestamp: 180000, abilityGameID: 600, sourceID: 9, targetID,
+          amount: 500000, unmitigatedAmount: 500000, absorbed: 0,
+        })),
+      ],
+    };
+    const result = await runPipeline(
+      "https://www.fflogs.com/reports/AbC123xYz9KlMnOp#fight=3", party,
+      deps({ fetchFightData: vi.fn().mockResolvedValue(withInstakill) }),
+    );
+    expect(result.plans).toHaveLength(1);
+    expect(result.plans[0].damage.name).toBe("Big Raidwide");
+  });
 });
