@@ -91,8 +91,9 @@ JOBS = {
     "brd": 23, "mch": 31, "dnc": 38,
     "blm": 25, "smn": 27, "rdm": 35, "pct": 42,
 }
-# 64px job glyph sets: 091000 silver, 092000 gold, 093000 orange, 094000 blue
-JOB_ICON_BASE = 92000
+# 062000 + ClassJob row id = the classic job icons (party list set).
+# This is the only series actually indexed by job id; _hr1 doubles it to 56px.
+JOB_ICON_BASE = 62000
 
 
 def get_json(url: str) -> dict:
@@ -148,7 +149,7 @@ def main() -> None:
     jobs_dir.mkdir(exist_ok=True)
     for abbr, job_id in JOBS.items():
         icon_id = JOB_ICON_BASE + job_id
-        path = f"ui/icon/{icon_id // 1000 * 1000:06d}/{icon_id:06d}.tex"
+        path = f"ui/icon/{icon_id // 1000 * 1000:06d}/{icon_id:06d}_hr1.tex"
         req = urllib.request.Request(
             f"{API}/asset?path={path}&format=png",
             headers={"User-Agent": "ffxiv-defense-planner"},
